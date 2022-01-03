@@ -1,0 +1,110 @@
+7. Mongo Shell Useful Commands 
+
+    ============== Commands ==================
+    Open mongo shell 
+        sudo systemctl start mongod 
+        mongo
+
+    1. Mongo DB Commands For Database 
+
+        1. View all databases
+            show dbs 
+
+        2. Create a new or switch databases 
+            db databaseName 
+        
+        3. View current Database
+            db
+    
+        4. Delete Database 
+            db.dropDatabase()
+        
+    2. Mongo DB Commands For collections (Table) 
+
+        1. Show Collections
+             show collections
+            
+        2. Create A collection 
+            db.createCollection('collectionNameIsHere')
+        
+        3. Drop a collection
+            db.collectionNameIsHere.drop()
+        
+    3. Mongo DB Commands For document (Row)
+
+        1. Show all Rows in a Collection 
+            db.collectionNameIsHere.find()
+
+        2. Show all Rows in a Collection (Prettified)
+            db.collectionNameIsHere.find().pretty()
+
+        3. Find the first row matching the object
+            db.collectionNameIsHere.findOne({name: 'value'})
+        
+        4. Search in a MongoDb Database
+            db.collectionNameIsHere.find({name:'value'})
+        
+        5. Limit the number of rows in output
+            db.collectionNameIsHere.find().limit(2)
+        
+        6. Count the number of rows in the output
+            db.collectionNameIsHere.find().count()
+        
+        7. Insert One Row
+            db.collectionNameIsHere.insert({'name': 'Harry', 'age': 26})
+
+        8. Insert many Rows
+            db.collectionNameIsHere.insertMany([{ 'name': 'A', 'age': 40 }, {'name': 'B', 'lang': 20}])
+        
+        9. Delete A Row 
+            db.collectionNameIsHere.remove({name: 'value'})
+
+        10. Update A Row 
+
+            If row is available then update data of this row.
+                db.collectionNameIsHere.update({name: 'Value'},
+                {
+                    'name': 'new Values',
+                    'age': 50',
+                })
+
+            If row is available then update data of this row. and If row is not available then it will insert new row. 
+                db.collectionNameIsHere.update({name: 'Value'},
+                {
+                    'name': 'new Values',
+                    'age': 50',
+                }, {upsert: true})
+            
+        11. Mongodb Increment Operator => mongodb update operatoors
+            it will Increment age from 2...
+                db.collectionNameIsHere.update({name: 'value'},
+                {$inc:{
+                    age: 2
+                }})
+
+        12. Mongodb Rename Operator => mongodb update operatoors
+            it will rename name/key of the document rows
+                db.collectionNameIsHere.update({name: 'value', age: 22},
+                {$rename:{
+                    name : 'fullName',
+                    age : 'userAge'
+                }})
+
+            if want to rename all rows key 
+              db.collectionNameIsHere.update({},
+                {$rename:{
+                    name : 'fullName',
+                    age : 'userAge'
+                }})
+
+        13. Less than/Greater than/ Less than or Eq/Greater than or Eq
+            db.collectionNameIsHere.find({age: {$lt: 10}})
+            db.collectionNameIsHere.find({age: {$lte: 10}})
+            db.collectionNameIsHere.find({age: {$gt: 10}})
+            db.collectionNameIsHere.find({age: {$gte: 10}})
+
+        14. Sort 
+            db.collectionNameIsHere.find().sort({age:1}).preety()
+
+    More Mongo DB Update Operators is herer=> 
+     https://docs.mongodb.com/manual/reference/operator/update/
