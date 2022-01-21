@@ -11,7 +11,7 @@
             show dbs 
 
         2. Create a new or switch databases 
-            db databaseName 
+            use databaseName 
         
         3. View current Database
             db
